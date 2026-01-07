@@ -5,12 +5,12 @@ import Spreadsheet from "./pages/Spreadsheet";
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<AppLayout />}>
+    <AppLayout>
+      <Routes>
         <Route path="/" element={<Navigate to="/users" />} />
         <Route path="/users" element={<Users />} />
         <Route path="/spreadsheet" element={<Spreadsheet />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </AppLayout>
   );
 }

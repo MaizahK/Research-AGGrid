@@ -2,9 +2,16 @@ import { useMemo } from "react";
 import { Card } from "antd";
 import { AgGridReact } from "ag-grid-react";
 
+import { ModuleRegistry } from "ag-grid-community";
+import { ClientSideRowModelModule } from "ag-grid-community";
+
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+
 import { useTheme } from "../context/ThemeContext";
+
+// ✅ Register required modules
+ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
 export default function Spreadsheet() {
   const { darkMode } = useTheme();
@@ -18,10 +25,13 @@ export default function Spreadsheet() {
     []
   );
 
-  const rowData = [
-    { name: "John", age: 25, country: "USA" },
-    { name: "Jane", age: 30, country: "UK" },
-  ];
+  const rowData = useMemo(
+    () => [
+      { name: "John", age: 25, country: "USA" },
+      { name: "Jane", age: 30, country: "UK" },
+    ],
+    []
+  );
 
   return (
     <Card title="Spreadsheet">
@@ -32,7 +42,10 @@ export default function Spreadsheet() {
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
-          defaultColDef={{ resizable: true }}
+          defaultColDef={{
+            resizable: true,
+            flex: 1,
+          }}
         />
       </div>
     </Card>

@@ -4,15 +4,15 @@ import { ConfigProvider, theme } from "antd";
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [dark, setDark] = useState(false);
+
+  const toggleTheme = () => setDark((prev) => !prev);
 
   return (
-    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+    <ThemeContext.Provider value={{ dark, toggleTheme }}>
       <ConfigProvider
         theme={{
-          algorithm: darkMode
-            ? theme.darkAlgorithm
-            : theme.defaultAlgorithm,
+          algorithm: dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
         }}
       >
         {children}
